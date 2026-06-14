@@ -1,38 +1,30 @@
 :root {
-    --bg-dark: #121212;       /* Cinematic dark background for photos */
-    --text-light: #f5f5f5;    /* Off-white text for readability */
-    --text-muted: #a0a0a0;    /* Grey text for secondary details */
-    --accent: #e0a96d;        /* Subtle gold/warm accent color */
-    --gap-standard: 20px;     /* Uniform spacing across the layout */
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --bg-color: #0a0a0a;
+    --text-color: #ffffff;
+    --accent: #ffffff;
+    --gap-standard: 20px;
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 header {
-    padding: 30px var(--gap-standard);
-    border-bottom: 1px solid #222;
+    padding: 20px 40px;
+    border-bottom: 1px solid #1a1a1a;
 }
 
-/* Flexbox layout for navigation bar line */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
-.logo {
+nav .logo {
     font-weight: 700;
     letter-spacing: 2px;
     font-size: 1.2rem;
@@ -42,132 +34,103 @@ nav ul {
     display: flex;
     list-style: none;
     gap: 30px;
+    margin: 0;
+    padding: 0;
 }
 
-nav a {
-    color: var(--text-muted);
+nav ul a {
+    color: #888;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.3s;
 }
 
-nav a:hover {
-    color: var(--accent);
-}
-.hero {
-    max-width: 1200px;
-    margin: 60px auto;
-    padding: 0 var(--gap-standard);
-    text-align: center;
+nav ul a:hover {
+    color: var(--text-color);
 }
 
-.hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    letter-spacing: -0.5px;
-}
-
-.hero p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-}
+/* Gallery Layout Configuration */
 .gallery-container {
     max-width: 1200px;
-    margin: 80px auto;
+    margin: 60px auto;
     padding: 0 var(--gap-standard);
 }
 
 .gallery-container h2 {
     margin-bottom: 30px;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     letter-spacing: 1px;
+    font-weight: 400;
 }
 
-/* Responsive CSS Grid without needing complex media queries */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--gap-standard);
+    grid-auto-rows: 220px;
 }
 
-/* Foundational structural block representing an eventual image */
 .photo-box {
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    aspect-ratio: 3 / 2; /* Keeps the standard DSLR landscape photo ratio */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    background-color: #111;
+    border: 1px solid #222;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
 }
 
-/* Simple hover feedback to test interactive styling */
-.photo-box:hover {
-    transform: scale(1.02);
-    border-color: var(--accent);
-    color: var(--accent);
+.photo-box.vertical {
+    grid-row: span 2;
 }
-#contact {
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-box:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+}
+
+.photo-box:hover img {
+    transform: scale(1.04);
+}
+
+/* Contact Section Styling */
+.contact-container {
     max-width: 600px;
-    margin: 100px auto;
+    margin: 120px auto;
+    text-align: center;
     padding: 0 var(--gap-standard);
 }
 
-#contact h2 {
-    text-align: center;
-    margin-bottom: 30px;
+.contact-container h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.contact-container p {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
 }
 
-form input, form textarea {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    padding: 12px;
-    color: white;
-    font-family: inherit;
-    border-radius: 4px;
-}
-
-form textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-form button {
-    background: var(--text-light);
-    color: var(--bg-dark);
-    padding: 12px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    border-radius: 4px;
-}
-form button:hover {
-    background: var(--accent);
-}
-
-.direct-email {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-
-.direct-email a {
-    color: var(--accent);
+.email-button {
+    display: inline-block;
+    padding: 15px 35px;
+    border: 1px solid #ffffff;
+    color: #ffffff;
     text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
-footer {
-    text-align: center;
-    padding: 40px var(--gap-standard);
-    border-top: 1px solid #222;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+
+.email-button:hover {
+    background-color: #ffffff;
+    color: #000000;
+    transform: translateY(-2px);
 }
